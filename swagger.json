@@ -1,0 +1,3984 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OpenAPI Specification",
+    "description": "EMS API to work with Knowledge Model elements, like records, kpis, filters, triggers and their related data.",
+    "x-audience": "EX",
+    "version": "1.26.0"
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    },
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://16abf815-424c-413e-b92d-6c6f8fc633cd.remockly.com"
+    }
+  ],
+  "paths": {
+    "/api/knowledge-models": {
+      "get": {
+        "operationId": "getKnowledgeModel",
+        "summary": "Get a list of KMs",
+        "tags": [
+          "Schema"
+        ],
+        "description": "List of Knowledge Models defined in an EMS team",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/singleSortParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Knowledge Model ids and names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/knowledgeModelResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}": {
+      "get": {
+        "operationId": "getKnowledgeModelDetails",
+        "summary": "Get the top-level KM details",
+        "description": "Knowledge Model defined in an EMS team",
+        "tags": [
+          "Schema"
+        ],
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top-level Knowledge Model details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/knowledgeModelDetailedDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/filters": {
+      "get": {
+        "operationId": "getFilters",
+        "tags": [
+          "Schema"
+        ],
+        "summary": "Get a list of KM Filters",
+        "description": "List of Filters for the Knowledge Model",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/singleSortParam"
+          },
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-kms"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Filter ids and names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/filterResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/kpis": {
+      "get": {
+        "operationId": "getKpis",
+        "tags": [
+          "Schema"
+        ],
+        "summary": "Get a list of KM KPI's schema",
+        "description": "List of KPI's schema",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/singleSortParam"
+          },
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of KPI's",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/kpiSchemaResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/records": {
+      "get": {
+        "operationId": "getRecords",
+        "tags": [
+          "Schema"
+        ],
+        "summary": "Get a list of KM Records schema",
+        "description": "List of Records schema",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/singleSortParam"
+          },
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record ids and names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recordSchemaResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/records/{record_id}": {
+      "get": {
+        "operationId": "getRecordDetails",
+        "tags": [
+          "Schema"
+        ],
+        "summary": "Get the top-level KM Record Schema details",
+        "description": "Top-level Record Schema details",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "name": "record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "MATERIALS"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/recordSingleSortParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Top-level Record Schema details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recordDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/data": {
+      "get": {
+        "operationId": "getKnowledgeModelDataResult",
+        "tags": [
+          "Data"
+        ],
+        "summary": "Get a list of KM data",
+        "description": "Data for a Knowledge Model",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/filtersParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsOptionalParamKM"
+          },
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortParamKM"
+          },
+          {
+            "$ref": "#/components/parameters/filterExprParamKM"
+          },
+          {
+            "$ref": "#/components/parameters/options"
+          },
+          {
+            "$ref": "#/components/parameters/kpisParam"
+          },
+          {
+            "$ref": "#/components/parameters/searchTerm"
+          },
+          {
+            "$ref": "#/components/parameters/searchPrecision"
+          },
+          {
+            "$ref": "#/components/parameters/searchFieldKM"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Knowledge Model data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recordResultPageDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/records/{record_id}/data": {
+      "get": {
+        "operationId": "getRecordDataResult",
+        "tags": [
+          "Data"
+        ],
+        "summary": "Get a list of KM Record data",
+        "description": "Data for a Record in the Knowledge Model",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "name": "record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "MATERIALS"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/filtersParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortParam"
+          },
+          {
+            "$ref": "#/components/parameters/filterExprParam"
+          },
+          {
+            "$ref": "#/components/parameters/options"
+          },
+          {
+            "$ref": "#/components/parameters/searchTerm"
+          },
+          {
+            "$ref": "#/components/parameters/searchPrecision"
+          },
+          {
+            "$ref": "#/components/parameters/searchField"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recordResultPageDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/triggers": {
+      "get": {
+        "operationId": "getTriggers",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Get a list of KM Triggers",
+        "description": "List of Triggers for the Knowledge Model",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/singleSortParam"
+          },
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-kms"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Triggers ids and names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/triggerResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/triggers/{trigger_id}/subscriptions": {
+      "post": {
+        "operationId": "createSubscription",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Creates a subscription for the trigger",
+        "description": "Creates a subscription for the trigger",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-kms"
+            }
+          },
+          {
+            "name": "trigger_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abc-123-efg-456"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Subscription's details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscriptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Id of the created subscription",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionId"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/subscriptions": {
+      "get": {
+        "operationId": "getSubscriptions",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Get a list of Subscriptions",
+        "description": "List of all Subscriptions created",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/singleSortParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Subscription details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/subscriptions/{subscription_id}": {
+      "delete": {
+        "operationId": "unsubscribe",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Unsubscribe from a trigger removing all the data for the subscription",
+        "description": "Unsubscribe from a trigger removing all the data for the subscription",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abc-123-efg-456"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateSubscription",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Updates a subscription",
+        "description": "Updates a subscription",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abc-123-efg-456"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Details to update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscriptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/subscriptions/{subscription_id}/events": {
+      "patch": {
+        "operationId": "nextPageFromParkingLot",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Retrieves the next page of events if  they were not forwarded due to a failed subscription",
+        "description": "Retrieves the next page of events if  they were not forwarded due to a failed subscription",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abc-123-efg-456"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Signals data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignalResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/subscriptions/{subscription_id}/pause": {
+      "patch": {
+        "operationId": "pauseSubscription",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Pauses the subscription to stop receiving events",
+        "description": "Pauses the subscription to stop receiving events",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abc-123-efg-456"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Subscription was updated succeeded"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/subscriptions/{subscription_id}/resume": {
+      "patch": {
+        "operationId": "resumeSubscription",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Resumes paused subscription to start receiving events again",
+        "description": "Resumes paused subscription to start receiving events again",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abc-123-efg-456"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Subscription was updated succeeded"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/subscriptions/{subscription_id}/resume/latest": {
+      "patch": {
+        "operationId": "resumeSubscriptionNoHistory",
+        "tags": [
+          "Subscription"
+        ],
+        "summary": "Resumes paused subscription to start receiving new events, discarding history events",
+        "description": "Resumes paused subscription to start receiving new events again, discarding history events",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abc-123-efg-456"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Subscription was updated succeeded"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/spec": {
+      "get": {
+        "operationId": "getKnowledgeModelSpec",
+        "tags": [
+          "Beta: Semantics for 3P AI Agents"
+        ],
+        "summary": "Generate an OpenAPI spec from a Knowledge Model",
+        "description": "OpenaAPI spec of Knowledge Model",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "name": "curated",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OpenAPI Spec",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/openApiSpecDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/records/{record_id}/summary": {
+      "get": {
+        "operationId": "summaryResult",
+        "tags": [
+          "Beta: Semantics for 3P AI Agents"
+        ],
+        "summary": "Get KM record statistics - Only for Attributes",
+        "description": "Knowledge Model record content statistics, only calculed for attributes. KPI and Flags will return empty results",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "name": "record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "MATERIALS"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/filtersParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsOptionalParam"
+          },
+          {
+            "$ref": "#/components/parameters/excludFieldsOptionalParam"
+          },
+          {
+            "$ref": "#/components/parameters/sampleSizeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recordSummaryResultPageDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/records/{record_id}/query": {
+      "get": {
+        "operationId": "getRecordQueryResult",
+        "tags": [
+          "Beta: Semantics for 3P AI Agents"
+        ],
+        "summary": "Query a KM record",
+        "description": "Data for a Record in the Knowledge Model",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "name": "record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "MATERIALS"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/filtersParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsOptionalParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortParam"
+          },
+          {
+            "$ref": "#/components/parameters/filterExprParam"
+          },
+          {
+            "$ref": "#/components/parameters/options"
+          },
+          {
+            "$ref": "#/components/parameters/searchTerm"
+          },
+          {
+            "$ref": "#/components/parameters/searchPrecision"
+          },
+          {
+            "$ref": "#/components/parameters/searchField"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recordQueryResultPageDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/knowledge-models/{km_id}/query": {
+      "get": {
+        "operationId": "getKnowledgeModelQueryResult",
+        "tags": [
+          "Beta: Semantics for 3P AI Agents"
+        ],
+        "summary": "Query data from different KM records",
+        "description": "Query Data for a Knowledge Model that is combining different Records",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/filtersParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsOptionalParamKM"
+          },
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageSizeParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortParamKM"
+          },
+          {
+            "$ref": "#/components/parameters/filterExprParamKM"
+          },
+          {
+            "$ref": "#/components/parameters/options"
+          },
+          {
+            "$ref": "#/components/parameters/kpisParam"
+          },
+          {
+            "$ref": "#/components/parameters/searchTerm"
+          },
+          {
+            "$ref": "#/components/parameters/searchPrecision"
+          },
+          {
+            "$ref": "#/components/parameters/searchFieldKM"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recordQueryResultPageDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/odata/{km_id}.svc/$metadata": {
+      "get": {
+        "operationId": "odataMetadataResult",
+        "tags": [
+          "Beta: OData Protocol"
+        ],
+        "summary": "OData metadata endpoint",
+        "description": "OData Knowledge Model $metadata",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/odataFormatParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ODataServiceResultPage"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ODataServiceResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/NotSupportedFormat"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/odata/{km_id}.svc": {
+      "get": {
+        "operationId": "odataServiceDefinitionResult",
+        "tags": [
+          "Beta: OData Protocol"
+        ],
+        "summary": "OData service definition endpoint",
+        "description": "OData Knowledge Model service definition endpoint",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/odataFormatParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ODataServiceDefinitionResultPage"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ODataServiceDefinitionXMLResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/NotSupportedFormat"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/odata/{km_id}.svc/{record_id}_entries": {
+      "get": {
+        "operationId": "odataServiceDataResult",
+        "tags": [
+          "Beta: OData Protocol"
+        ],
+        "summary": "OData service data endpoint",
+        "description": "OData Knowledge Model service data endpoint",
+        "parameters": [
+          {
+            "name": "km_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "open-purchase-requisition.purchase-requisition-km"
+            }
+          },
+          {
+            "name": "record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "MATERIALS"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/odataFormatParam"
+          },
+          {
+            "$ref": "#/components/parameters/odataSelectParam"
+          },
+          {
+            "$ref": "#/components/parameters/odataTopParam"
+          },
+          {
+            "$ref": "#/components/parameters/odataSkipParam"
+          },
+          {
+            "$ref": "#/components/parameters/odataFilterParam"
+          },
+          {
+            "$ref": "#/components/parameters/odataFilterIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/odataOrderByParam"
+          },
+          {
+            "$ref": "#/components/parameters/odataCountParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Record data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ODataServiceDataResultPage"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ODataServiceDataXMLResultPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "415": {
+            "$ref": "#/components/responses/NotSupportedFormat"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "AppKey"
+      }
+    },
+    "schemas": {
+      "resultPage": {
+        "title": "Result page",
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Page",
+            "example": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Page size, defined by pageSize parameter",
+            "example": 50
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total elements returned in the page",
+            "example": 1
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "material_number"
+            }
+          }
+        }
+      },
+      "schemaResultPage": {
+        "title": "Result page",
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Page",
+            "example": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Page size, defined by pageSize parameter",
+            "example": 50
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total elements returned in the page",
+            "example": 1
+          },
+          "sort": {
+            "type": "string",
+            "description": "Field used to apply sorting to the requested data, + or no symbol means ASC, - means DESC",
+            "example": "+id"
+          }
+        }
+      },
+      "recordResultPageDTO": {
+        "title": "Record data result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/recordItemDTO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/resultPage"
+          }
+        ]
+      },
+      "recordQueryResultPageDTO": {
+        "title": "Record data result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "array",
+            "description": "List of record item, compound with name and value",
+            "items": {
+              "additionalProperties": {},
+              "example": [
+                {
+                  "material_name": "PC Installation",
+                  "material_number": "I-1000",
+                  "material_group": "Services"
+                },
+                {
+                  "material_name": "PC Configuration",
+                  "material_number": "I-1001",
+                  "material_group": "Services"
+                }
+              ]
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/resultPage"
+          }
+        ]
+      },
+      "recordSummaryResultPageDTO": {
+        "title": "Record data result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/recordItemDTO"
+          },
+          "shape": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "example": [
+                10,
+                200000
+              ]
+            }
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "integer",
+                "example": 300000,
+                "description": "Number of non-null values (applicable to all field types)"
+              },
+              "unique": {
+                "type": "integer",
+                "description": "Number of unique non-null values (applicable only to strings & timestamps)"
+              },
+              "top": {
+                "type": "string",
+                "description": "Most frequent value (applicable only to strings & timestamps)"
+              },
+              "freq": {
+                "type": "string",
+                "description": "Frequency of the most frequent value (applicable only to strings & timestamps)"
+              },
+              "mean": {
+                "type": "number",
+                "description": "Mean of the values (applicable only to numeric fields)"
+              },
+              "std": {
+                "type": "number",
+                "description": "Standard deviation of the values (applicable only to numeric fields)"
+              },
+              "min": {
+                "type": "number",
+                "description": "Minimum value (applicable only to numeric fields)"
+              },
+              "max": {
+                "type": "number",
+                "description": "Maximum value (applicable only to numeric fields)"
+              },
+              "25_percentile": {
+                "type": "number",
+                "description": "percentile (applicable only to numeric fields)"
+              },
+              "50_percentile": {
+                "type": "number",
+                "description": "percentile (applicable only to numeric fields)"
+              },
+              "75_percentile": {
+                "type": "number",
+                "description": "percentile (applicable only to numeric fields)"
+              }
+            }
+          }
+        }
+      },
+      "recordSchemaResultPage": {
+        "title": "Record schema result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recordIdDTO"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemaResultPage"
+          }
+        ]
+      },
+      "filterResultPage": {
+        "title": "Filter schema result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/filterDTO"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemaResultPage"
+          }
+        ]
+      },
+      "kpiDTO": {
+        "title": "KPI asset definition",
+        "description": "KPI structure within the knowledge model",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "KPI's Unique identifier",
+            "example": "AVG_EVENTS_PER_CASE"
+          },
+          "name": {
+            "type": "string",
+            "description": "KPI's display name, a human understandable name",
+            "example": "Average events per case"
+          },
+          "description": {
+            "type": "string",
+            "description": "KPI's description",
+            "example": "An average events per case"
+          },
+          "format": {
+            "type": "string",
+            "example": "#.###",
+            "description": "Format to be applied"
+          },
+          "unit": {
+            "type": "string",
+            "example": "euros",
+            "description": "Unit added to field value"
+          },
+          "direction": {
+            "type": "string",
+            "example": "Up, Down, None",
+            "description": "Desired trend direction for the KPI progress"
+          },
+          "target": {
+            "type": "string",
+            "example": "any value",
+            "description": "Default KPI target (Optional)"
+          },
+          "parameters": {
+            "type": "array",
+            "description": "KPI's List of parameters",
+            "items": {
+              "$ref": "#/components/schemas/kpiParameterItemDTO"
+            },
+            "example": [
+              {
+                "id": "parameter_1",
+                "name": "My First Parameter",
+                "value": "1"
+              },
+              {
+                "id": "parameter_2",
+                "name": "My Second Parameter",
+                "value": "a"
+              },
+              {
+                "id": "parameter_3",
+                "name": "My Third Parameter",
+                "value": "5"
+              }
+            ]
+          }
+        }
+      },
+      "kpiParameterItemDTO": {
+        "title": "Parameter defined for a Knowledge Model KPI",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Field identity to use in field list param and filterExpression param"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human understandable text"
+          },
+          "value": {
+            "type": "string",
+            "description": "Initial value for the parameter."
+          }
+        }
+      },
+      "kpiSchemaResultPage": {
+        "title": "KPI schema result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/kpiDTO"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemaResultPage"
+          }
+        ]
+      },
+      "knowledgeModelResultPage": {
+        "title": "KnowledgeModel result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/knowledgeModelSimplifiedDTO"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemaResultPage"
+          }
+        ]
+      },
+      "triggerResultPage": {
+        "title": "Trigger schema result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/triggerDTO"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemaResultPage"
+          }
+        ]
+      },
+      "subscriptionResultPage": {
+        "title": "Subscription schema result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/subscriptionDTO"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemaResultPage"
+          }
+        ]
+      },
+      "SignalResultPage": {
+        "title": "Signal result page",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pageSize": {
+            "type": "integer",
+            "description": "Page size, defined by the system",
+            "example": 50
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total of remaining signals at the parking lot",
+            "example": 1
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/signalDTO"
+            }
+          }
+        }
+      },
+      "ODataServiceResultPage": {
+        "title": "OData Service result page",
+        "type": "object",
+        "properties": {
+          "$Version": {
+            "type": "string",
+            "example": 4.01
+          }
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "$Kind": {
+              "type": "string",
+              "example": "EntityType"
+            }
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "$Type": {
+                "type": "string",
+                "example": null
+              }
+            }
+          }
+        }
+      },
+      "ODataServiceDefinitionResultPage": {
+        "title": "OData Service Definition result page",
+        "type": "object",
+        "properties": {
+          "@odata.context": {
+            "type": "string",
+            "description": "OData $metadata URI",
+            "example": "https://team.domain.celonis.cloud/intelligence/api/odata/kmid.svc/$metadata"
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "km_record_entries"
+                },
+                "url": {
+                  "type": "string",
+                  "example": "km_record_entries"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ODataServiceDefinitionXMLResultPage": {
+        "title": "OData Service Definition result page",
+        "type": "object",
+        "properties": {
+          "@odata.context": {
+            "type": "string",
+            "description": "OData $metadata URI",
+            "example": "https://team.domain.celonis.cloud/intelligence/api/odata/kmid.svc/$metadata"
+          },
+          "workspace": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "example": "ODataKnowledgeModel.Container"
+              },
+              "collection": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "km_record_entries",
+                      "xml": {
+                        "attribute": true
+                      }
+                    },
+                    "href": {
+                      "type": "string",
+                      "example": "km_record_entries",
+                      "xml": {
+                        "attribute": true
+                      }
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "km_record_entries"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ODataServiceDataResultPage": {
+        "title": "OData Service Data result page",
+        "type": "object",
+        "properties": {
+          "@odata.context": {
+            "type": "string",
+            "description": "OData $metadata URI",
+            "example": "https://team.domain.celonis.cloud/intelligence/api/odata/kmid.svc/$metadata#km_record_entries"
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "example": {
+                  "field_id1": "value1",
+                  "field_id2": "value2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ODataServiceDataXMLResultPage": {
+        "title": "OData Service Data XML result page",
+        "type": "object",
+        "properties": {
+          "feed": {
+            "type": "object",
+            "properties": {
+              "context": {
+                "type": "string",
+                "description": "OData $metadata URI",
+                "example": "https://team.domain.celonis.cloud/intelligence/api/odata/kmid.svc/$metadata#km_record_entries",
+                "xml": {
+                  "attribute": true
+                }
+              },
+              "entry": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "updated": {
+                      "type": "string",
+                      "format": "datatime"
+                    },
+                    "category": {
+                      "type": "object",
+                      "properties": {
+                        "term": {
+                          "type": "string",
+                          "xml": {
+                            "attribute": true
+                          },
+                          "example": "#ODataKnowledgeModel.DELIVERY_ITEM"
+                        }
+                      }
+                    },
+                    "content": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "application/xml",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "properties": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "example": {
+                              "field_id1": "value1",
+                              "field_id2": "value2"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "subscriptionId": {
+        "title": "Id subscription created",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "subscription id",
+            "example": 123
+          }
+        }
+      },
+      "errorDTO": {
+        "title": "Error",
+        "type": "object",
+        "description": "This [RFC7807] specification is to define common error formats for those applications that need one, so that they aren't required to define their own, or worse, tempted to redefine the semantics of existing HTTP status codes. This definition was copied from https://datatracker.ietf.org/doc/html/rfc7807",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type.  It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4). This definition was copied from https://datatracker.ietf.org/doc/html/rfc7807"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem. This definition was copied from https://datatracker.ietf.org/doc/html/rfc7807"
+          },
+          "detail": {
+            "type": "string",
+            "description": "The details of the Error"
+          },
+          "errorCode": {
+            "type": "string",
+            "description": "Unique Identifier of the Error"
+          },
+          "type": {
+            "type": "string",
+            "description": "A URI reference [RFC3986] that identifies the problem type. This definition was copied from https://datatracker.ietf.org/doc/html/rfc7807"
+          }
+        }
+      },
+      "authErrorDTO": {
+        "title": "Authentication Error",
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "callbackInfoDTO": {
+        "title": "Callback Information",
+        "type": "object",
+        "required": [
+          "uri",
+          "protocol"
+        ],
+        "properties": {
+          "uri": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "description": "Uri to perform the callback from Intelligence API once the trigger is fired",
+            "example": "https://fake.domain.es/triggers/hook"
+          },
+          "protocol": {
+            "type": "string",
+            "enum": [
+              "HTTPS"
+            ],
+            "description": "Only value possible actually is HTTPS which means the callback URI must be a valid https",
+            "example": "HTTPS"
+          },
+          "headers": {
+            "type": "object",
+            "description": "Callback headers may include authentication tokens, content types, and more. \n<br><br>Allowed callback headers are: \n<br>Authorization \n<br>Content-Type \n<br>User-Agent \n<br>Host \n<br>Accept \n<br><br>Additionally, the total size limit for headers is <strong>8192</strong> bytes.\n",
+            "additionalProperties": {},
+            "example": {
+              "Authorization": "eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI0Ii",
+              "Content-Type": "application/json"
+            }
+          }
+        }
+      },
+      "filterDTO": {
+        "title": "Filter",
+        "description": "Filter to apply in a KM",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Filter's Unique identifier",
+            "example": "24M_FILTER"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human understandable Filter display name",
+            "example": "24 Months"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human understandable Filter description",
+            "example": "Materials we purchased over the past 24 months."
+          }
+        }
+      },
+      "knowledgeModelIdDTO": {
+        "title": "Knowledge Model Identifier",
+        "description": "Knowledge Model id and name",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Identifier of Knowledge Model",
+            "example": "open-purchase-requisition.purchase-requisition-km"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human understandable text",
+            "example": "Purchase Requisition KM"
+          }
+        }
+      },
+      "knowledgeModelDetailedDTO": {
+        "title": "Knowledge Model",
+        "description": "Knowledge Model data's structure",
+        "type": "object",
+        "properties": {
+          "extendedKMId": {
+            "type": "string",
+            "description": "Knowledge model used as reference, KM base.",
+            "example": "open-purchase-requisition.purchase-requisition-km-base"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/knowledgeModelIdDTO"
+          }
+        ]
+      },
+      "knowledgeModelSimplifiedDTO": {
+        "title": "Knowledge Model",
+        "description": "Knowledge Model data's structure",
+        "type": "object",
+        "properties": {
+          "published": {
+            "type": "string",
+            "description": "Latest published date",
+            "example": "2023-04-19 11:29:45"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/knowledgeModelIdDTO"
+          }
+        ]
+      },
+      "recordItemHeaderDTO": {
+        "title": "Record Item Header",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Field identity to use in field list param and filterExpression param"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human understandable text"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "integer",
+              "date",
+              "time",
+              "datetime",
+              "timestamp",
+              "float",
+              "boolean",
+              "string"
+            ],
+            "description": "Possible data types."
+          },
+          "format": {
+            "type": "string",
+            "description": "Format expression"
+          },
+          "unit": {
+            "type": "string",
+            "description": "A complementary sign for format value view"
+          },
+          "aggregation": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indicate if a field is a aggregation/calculated information(KPI)."
+          },
+          "filterable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indicate if the field could be filtered."
+          },
+          "sortable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indicate if the field could be sorted."
+          }
+        }
+      },
+      "recordItemDTO": {
+        "title": "Record Item",
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recordItemHeaderDTO"
+            },
+            "example": [
+              {
+                "id": "material_name",
+                "name": "Material name",
+                "type": "string",
+                "format": "",
+                "unit": "",
+                "aggregation": "false",
+                "filterable": "true",
+                "sortable": "true"
+              },
+              {
+                "id": "material_number",
+                "name": "Material number",
+                "type": "string",
+                "format": "",
+                "unit": "",
+                "aggregation": "false",
+                "filterable": "true",
+                "sortable": "true"
+              },
+              {
+                "id": "material_group",
+                "name": "Material group",
+                "type": "string",
+                "format": "",
+                "unit": "",
+                "aggregation": "false",
+                "filterable": "true",
+                "sortable": "true"
+              }
+            ]
+          },
+          "data": {
+            "type": "array",
+            "description": "List of record item, compound with name and value",
+            "items": {
+              "additionalProperties": {},
+              "example": [
+                {
+                  "material_name": "PC Installation / Configuration",
+                  "material_number": "I-1000",
+                  "material_group": "Services"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "recordIdDTO": {
+        "title": "Record Type Identifier",
+        "description": "Record Type's id and name",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Record's Unique identifier",
+            "example": "MATERIALS"
+          },
+          "name": {
+            "type": "string",
+            "description": "Record display name, a human understandable name",
+            "example": "Materials"
+          },
+          "description": {
+            "type": "string",
+            "description": "Record description",
+            "example": "Materials that have been purchased."
+          },
+          "shortDisplayName": {
+            "type": "string",
+            "description": "Record short display name",
+            "example": "Materials"
+          },
+          "internalNote": {
+            "type": "string",
+            "description": "Record internal note",
+            "example": "Materials"
+          }
+        }
+      },
+      "recordFieldDTO": {
+        "title": "Record Type Field",
+        "description": "Fields for a Record",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "payment_amount",
+            "description": "Amount pending to pay"
+          },
+          "name": {
+            "type": "string",
+            "example": "Amount in euros pending to pay",
+            "description": "human understandable name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Record field description",
+            "example": "Amount pending to pay"
+          },
+          "shortDisplayName": {
+            "type": "string",
+            "description": "Record short display name",
+            "example": "Amount"
+          },
+          "internalNote": {
+            "type": "string",
+            "description": "Record internal note",
+            "example": "Amount of the record"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "string",
+              "date",
+              "integer",
+              "boolean",
+              "number",
+              "datetime",
+              "timestamp",
+              "float"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "example": "#.###",
+            "description": "Format to be applied"
+          },
+          "unit": {
+            "type": "string",
+            "example": "euros",
+            "description": "Unit added to field value"
+          }
+        }
+      },
+      "recordDTO": {
+        "title": "Record Type",
+        "description": "Record represents a concept inside a Knowledge Model",
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recordFieldDTO"
+            },
+            "example": [
+              {
+                "id": "material_name",
+                "name": "Material Name",
+                "description": "Materials name that have been purchased.",
+                "shortDisplayName": "Materials",
+                "internalNote": "Materials",
+                "type": "string",
+                "format": "",
+                "unit": ""
+              },
+              {
+                "id": "material_number",
+                "name": "Material Number",
+                "description": "Materials number that have been purchased.",
+                "shortDisplayName": "Materials",
+                "internalNote": "Materials",
+                "type": "string",
+                "format": "",
+                "unit": ""
+              },
+              {
+                "id": "material_group",
+                "name": "Material Group",
+                "description": "Materials group that have been purchased.",
+                "shortDisplayName": "Materials",
+                "internalNote": "Materials",
+                "type": "string",
+                "format": "",
+                "unit": ""
+              }
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/recordIdDTO"
+          }
+        ]
+      },
+      "triggerDTO": {
+        "title": "Trigger",
+        "description": "Trigger defined at KM",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Trigger's Unique identifier as a SUID",
+            "example": "abc-123-bad-123"
+          },
+          "record": {
+            "type": "string",
+            "description": "Record's Unique identifier as a SUID",
+            "example": "efg-456-efg-456"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human understandable Trigger name",
+            "example": "Blocked Orders"
+          }
+        }
+      },
+      "subscriptionDTO": {
+        "title": "Subscription",
+        "description": "Subscription schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Subscriber's Unique identifier as a SUID",
+            "example": "abc-123-bad-123"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human understandable Subscription name",
+            "example": "Blocked Orders"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "failed",
+              "suspended",
+              "paused"
+            ]
+          },
+          "configurations": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/configurations"
+              }
+            ]
+          },
+          "knowledgeModelId": {
+            "type": "string",
+            "description": "Unique Identifier of Knowledge Model",
+            "example": "open-purchase-requisition.purchase-requisition-km"
+          },
+          "triggerId": {
+            "type": "string",
+            "description": "Trigger's Unique identifier as a SUID",
+            "example": "abc-123-bad-123"
+          },
+          "latestSucceedEvent": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the last succeeded event",
+            "example": "2023-07-21T17:32:28Z"
+          },
+          "offset": {
+            "type": "number",
+            "format": "int64",
+            "description": "Identifier of the last event handled",
+            "example": 123
+          }
+        }
+      },
+      "configurations": {
+        "type": "array",
+        "uniqueItems": true,
+        "description": "Configuration for the Subscription",
+        "example": "SKIP_ERRORS",
+        "items": {
+          "type": "string",
+          "enum": [
+            "SKIP_ERRORS"
+          ]
+        }
+      },
+      "signalDTO": {
+        "title": "Signal stored at parking lot",
+        "description": "Signal stored at parking lot",
+        "type": "object",
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "Subscriber's Unique identifier as a SUID",
+            "example": "abc-123-bad-123"
+          },
+          "triggerId": {
+            "type": "string",
+            "description": "Trigger's Unique identifier as a SUID",
+            "example": "abc-123-bad-123"
+          },
+          "signal": {
+            "type": "string",
+            "description": "Raw json of a signal",
+            "example": "{attribute:value,attribute:value....}"
+          }
+        }
+      },
+      "subscriptionRequest": {
+        "title": "SubscriptionRequest",
+        "description": "Request with details to create the subscription",
+        "type": "object",
+        "required": [
+          "name",
+          "callbackInfo"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "description": "Name for the subscription",
+            "example": "My Subscription to XYZ"
+          },
+          "callbackInfo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/callbackInfoDTO"
+              }
+            ]
+          }
+        }
+      },
+      "openApiSpecDTO": {
+        "properties": {
+          "openapi": {
+            "type": "string",
+            "pattern": "^3\\.0\\.\\d(-.+)?$"
+          },
+          "info": {
+            "type": "object",
+            "required": [
+              "title",
+              "version"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "termsOfService": {
+                "type": "string",
+                "format": "uri-reference"
+              },
+              "contact": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri-reference"
+                  }
+                }
+              },
+              "version": {
+                "type": "string"
+              },
+              "x-audience": {
+                "type": "string",
+                "example": "EX"
+              }
+            }
+          },
+          "servers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "url"
+              ],
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "security": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecurityRequirement"
+            }
+          },
+          "paths": {
+            "$ref": "#/components/schemas/Paths"
+          },
+          "components": {
+            "$ref": "#/components/schemas/Components"
+          }
+        }
+      },
+      "Reference": {
+        "type": "object",
+        "properties": {
+          "$ref": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        }
+      },
+      "Components": {
+        "type": "object",
+        "properties": {
+          "schemas": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schema"
+              },
+              {
+                "$ref": "#/components/schemas/Reference"
+              }
+            ]
+          }
+        }
+      },
+      "responses": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Reference"
+          },
+          {
+            "$ref": "#/components/schemas/Response"
+          }
+        ]
+      },
+      "parameters": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Reference"
+          },
+          {
+            "$ref": "#/components/schemas/Parameter"
+          }
+        ]
+      },
+      "examples": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Reference"
+          },
+          {
+            "$ref": "#/components/schemas/Example"
+          }
+        ]
+      },
+      "securitySchemes": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Reference"
+          },
+          {
+            "$ref": "#/components/schemas/SecurityScheme"
+          }
+        ]
+      },
+      "Schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "multipleOf": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMinimum": true
+          },
+          "maximum": {
+            "type": "number"
+          },
+          "exclusiveMaximum": {
+            "type": "boolean",
+            "default": false
+          },
+          "minimum": {
+            "type": "number"
+          },
+          "exclusiveMinimum": {
+            "type": "boolean",
+            "default": false
+          },
+          "maxLength": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minLength": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "pattern": {
+            "type": "string",
+            "format": "regex"
+          },
+          "maxItems": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "uniqueItems": {
+            "type": "boolean",
+            "default": false
+          },
+          "maxProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minProperties": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "required": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "enum": {
+            "type": "array",
+            "items": {},
+            "minItems": 1,
+            "uniqueItems": false
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "array",
+              "boolean",
+              "integer",
+              "number",
+              "object",
+              "string"
+            ]
+          },
+          "not": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schema"
+              },
+              {
+                "$ref": "#/components/schemas/Reference"
+              }
+            ]
+          },
+          "allOf": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Schema"
+                },
+                {
+                  "$ref": "#/components/schemas/Reference"
+                }
+              ]
+            }
+          },
+          "oneOf": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Schema"
+                },
+                {
+                  "$ref": "#/components/schemas/Reference"
+                }
+              ]
+            }
+          },
+          "anyOf": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Schema"
+                },
+                {
+                  "$ref": "#/components/schemas/Reference"
+                }
+              ]
+            }
+          },
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schema"
+              },
+              {
+                "$ref": "#/components/schemas/Reference"
+              }
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Schema"
+                },
+                {
+                  "$ref": "#/components/schemas/Reference"
+                }
+              ]
+            }
+          },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schema"
+              },
+              {
+                "$ref": "#/components/schemas/Reference"
+              },
+              {
+                "type": "boolean"
+              }
+            ],
+            "default": true
+          },
+          "description": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          },
+          "default": {},
+          "nullable": {
+            "type": "boolean",
+            "default": false
+          },
+          "example": {}
+        },
+        "additionalProperties": false
+      },
+      "Response": {
+        "type": "object",
+        "required": [
+          "description"
+        ],
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "content": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Example": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "value": {},
+          "externalValue": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Paths": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Operation": {
+        "type": "object",
+        "required": [
+          "responses"
+        ],
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "operationId": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Parameter"
+                },
+                {
+                  "$ref": "#/components/schemas/Reference"
+                }
+              ]
+            },
+            "uniqueItems": true
+          },
+          "responses": {
+            "$ref": "#/components/schemas/Responses"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MediaType": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schema"
+              },
+              {
+                "$ref": "#/components/schemas/Reference"
+              }
+            ]
+          },
+          "example": {},
+          "examples": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Example"
+                },
+                {
+                  "$ref": "#/components/schemas/Reference"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ExampleXORExamples"
+          }
+        ]
+      },
+      "Responses": {
+        "type": "object",
+        "properties": {
+          "default": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Response"
+              },
+              {
+                "$ref": "#/components/schemas/Reference"
+              }
+            ]
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Response"
+          },
+          {
+            "$ref": "#/components/schemas/Reference"
+          }
+        ],
+        "minProperties": 1,
+        "additionalProperties": false
+      },
+      "SecurityRequirement": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "ExampleXORExamples": {
+        "description": "Example and examples are mutually exclusive",
+        "not": {
+          "required": [
+            "example",
+            "examples"
+          ]
+        }
+      },
+      "SchemaXORContent": {
+        "description": "Schema and content are mutually exclusive, at least one is required",
+        "not": {
+          "required": [
+            "schema",
+            "content"
+          ]
+        },
+        "oneOf": [
+          {
+            "required": [
+              "schema"
+            ]
+          },
+          {
+            "required": [
+              "content"
+            ],
+            "description": "Some properties are not allowed if content is present",
+            "allOf": [
+              {
+                "not": {
+                  "required": [
+                    "style"
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "explode"
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "allowReserved"
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "example"
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "examples"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "Parameter": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "in": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "default": false
+          },
+          "deprecated": {
+            "type": "boolean",
+            "default": false
+          },
+          "allowEmptyValue": {
+            "type": "boolean",
+            "default": false
+          },
+          "style": {
+            "type": "string"
+          },
+          "explode": {
+            "type": "boolean"
+          },
+          "allowReserved": {
+            "type": "boolean",
+            "default": false
+          },
+          "schema": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schema"
+              },
+              {
+                "$ref": "#/components/schemas/Reference"
+              }
+            ]
+          },
+          "content": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MediaType"
+            },
+            "minProperties": 1,
+            "maxProperties": 1
+          },
+          "example": {},
+          "examples": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Example"
+                },
+                {
+                  "$ref": "#/components/schemas/Reference"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "in"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ExampleXORExamples"
+          },
+          {
+            "$ref": "#/components/schemas/SchemaXORContent"
+          }
+        ],
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PathParameter"
+          },
+          {
+            "$ref": "#/components/schemas/QueryParameter"
+          },
+          {
+            "$ref": "#/components/schemas/HeaderParameter"
+          },
+          {
+            "$ref": "#/components/schemas/CookieParameter"
+          }
+        ]
+      },
+      "PathParameter": {
+        "description": "Parameter in path",
+        "required": [
+          "required"
+        ],
+        "properties": {
+          "in": {
+            "enum": [
+              "path"
+            ]
+          },
+          "style": {
+            "enum": [
+              "matrix",
+              "label",
+              "simple"
+            ],
+            "default": "simple"
+          },
+          "required": {
+            "enum": [
+              true
+            ]
+          }
+        }
+      },
+      "QueryParameter": {
+        "description": "Parameter in query",
+        "properties": {
+          "in": {
+            "enum": [
+              "query"
+            ]
+          },
+          "style": {
+            "enum": [
+              "form",
+              "spaceDelimited",
+              "pipeDelimited",
+              "deepObject"
+            ],
+            "default": "form"
+          }
+        }
+      },
+      "HeaderParameter": {
+        "description": "Parameter in header",
+        "properties": {
+          "in": {
+            "enum": [
+              "header"
+            ]
+          },
+          "style": {
+            "enum": [
+              "simple"
+            ],
+            "default": "simple"
+          }
+        }
+      },
+      "CookieParameter": {
+        "description": "Parameter in cookie",
+        "properties": {
+          "in": {
+            "enum": [
+              "cookie"
+            ]
+          },
+          "style": {
+            "enum": [
+              "form"
+            ],
+            "default": "form"
+          }
+        }
+      },
+      "SecurityScheme": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/APIKeySecurityScheme"
+          },
+          {
+            "$ref": "#/components/schemas/OAuth2SecurityScheme"
+          }
+        ]
+      },
+      "APIKeySecurityScheme": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "in"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "apiKey"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "in": {
+            "type": "string",
+            "enum": [
+              "header"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OAuth2SecurityScheme": {
+        "type": "object",
+        "required": [
+          "type",
+          "flows"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "oauth2"
+            ]
+          },
+          "flows": {
+            "$ref": "#/components/schemas/OAuthFlows"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OAuthFlows": {
+        "type": "object",
+        "properties": {
+          "clientCredentials": {
+            "$ref": "#/components/schemas/ClientCredentialsFlow"
+          },
+          "authorizationCode": {
+            "$ref": "#/components/schemas/AuthorizationCodeOAuthFlow"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClientCredentialsFlow": {
+        "type": "object",
+        "required": [
+          "tokenUrl",
+          "scopes"
+        ],
+        "properties": {
+          "tokenUrl": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "refreshUrl": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "scopes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthorizationCodeOAuthFlow": {
+        "type": "object",
+        "required": [
+          "authorizationUrl",
+          "tokenUrl",
+          "scopes"
+        ],
+        "properties": {
+          "authorizationUrl": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "tokenUrl": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "refreshUrl": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "scopes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "parameters": {
+      "filtersParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "filters",
+        "description": "Predefined Knowledge Model filters to apply",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "active_incidents,cel_and_kpi"
+          }
+        }
+      },
+      "fieldsParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "fields",
+        "required": true,
+        "allowEmptyValue": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Field id from a record",
+            "example": "active,approval"
+          }
+        }
+      },
+      "filterExprParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "filterExpr",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Dynamic filter expressions",
+            "example": "active eq 'true',approval not eq ''"
+          }
+        }
+      },
+      "filterExprParamKM": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "filterExpr",
+        "required": false,
+        "description": "Dynamic filter expressions. Filters would be built by record_id \".\" field_id and the operation to apply.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "record.active eq 'true',record.approval not eq ‘'"
+          }
+        }
+      },
+      "pageParam": {
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "The page number of the result, starting by 0 (first page)"
+        }
+      },
+      "pageSizeParam": {
+        "in": "query",
+        "name": "pageSize",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 50,
+          "description": "The number of items returned in a page."
+        }
+      },
+      "sortParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "description": "Defines the strategy to proceed for sorting. It must be a comma separated list of fields, and they should start with \"+\" to apply ASC order or \"-\" to apply DESC order. Fields with no prefix will be sorted as ASC. Non existing fields at the header will throw an error.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "+field1,-field2,field3"
+          }
+        }
+      },
+      "sortParamKM": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "description": "Defines the strategy for sorting. Must be a comma separated list of record_id \".\" field_id, and should start with \"+\" to apply ASC order or \"-\" to apply DESC order. Fields with no prefix will be sorted as ASC. Non existing records or fields in the header will throw an error.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "+record.field1,-record.field2,record.field3"
+          }
+        }
+      },
+      "singleSortParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "description": "Defines the strategy to proceed for case insensitive sorting. It must be just one field, and it should start with \"+\" to apply ASC order or \"-\" to apply DESC order. Non prefix will sort as ASC. Non existing field at the header will throw an error.",
+        "schema": {
+          "type": "string",
+          "example": [
+            "field1"
+          ]
+        }
+      },
+      "recordSingleSortParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "description": "Defines the strategy to proceed for case insensitive sorting. It must be just one field, and it should start with \"+\" to apply ASC order or \"-\" to apply DESC order. Non prefix will sort as ASC. Non existing field at the header will throw an error. Note&#58; The sort operation is only applied in the fields section for id, name, description, shortDisplayName and internalNote.",
+        "schema": {
+          "type": "string",
+          "example": [
+            "field1"
+          ]
+        }
+      },
+      "options": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "options",
+        "required": false,
+        "description": "Set different **options to customize the data results** for a query. Supported options \n* **distinct**: Enable the unique data results for a query\n",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "distinct"
+          }
+        }
+      },
+      "kpisParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "kpis",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "As many kpi ids if they exists in the knowledge model",
+            "example": "AVG_EVENTS_PER_CASE,FILTERED_COUNT"
+          }
+        }
+      },
+      "fieldsOptionalParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "fields",
+        "required": false,
+        "allowEmptyValue": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Field id from a record",
+            "example": "active,approval"
+          }
+        }
+      },
+      "fieldsOptionalParamKM": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "fields",
+        "required": false,
+        "allowEmptyValue": false,
+        "description": "Fields are composed from a list of record id \".\" field id in a knowledge model.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "record.active,record.approval"
+          }
+        }
+      },
+      "excludFieldsOptionalParam": {
+        "style": "form",
+        "explode": false,
+        "in": "query",
+        "name": "excludeFields",
+        "required": false,
+        "allowEmptyValue": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Field id from a record",
+            "example": "active,approval"
+          }
+        }
+      },
+      "searchTerm": {
+        "in": "query",
+        "name": "searchTerm",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "Expect an string to search by"
+        }
+      },
+      "searchPrecision": {
+        "in": "query",
+        "name": "searchPrecision",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 10,
+          "description": "Number value used to approximate the result of search"
+        }
+      },
+      "searchField": {
+        "in": "query",
+        "name": "searchField",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "Parameter composed of field id",
+          "example": "ACTIVITY"
+        }
+      },
+      "searchFieldKM": {
+        "in": "query",
+        "name": "searchField",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "Parameter composed of record id \".\" field id",
+          "example": "MATERIALS.ACTIVITY"
+        }
+      },
+      "sampleSizeParam": {
+        "in": "query",
+        "name": "sampleSize",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 10,
+          "description": "The number of items returned in a sample."
+        }
+      },
+      "odataSelectParam": {
+        "in": "query",
+        "name": "$select",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The $select system query option allows clients to request a specific set of properties for each entity or complex type.",
+            "example": "active,approval"
+          }
+        }
+      },
+      "odataFormatParam": {
+        "in": "query",
+        "name": "$format",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "The $format system query option allows clients to request a response in a particular format and is useful for clients without access to request headers for standard content-type negotiation.",
+          "example": "json"
+        }
+      },
+      "odataTopParam": {
+        "in": "query",
+        "name": "$top",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "description": "The $top system query option requests the number of items in the queried collection to be included in the result.",
+          "example": 10
+        }
+      },
+      "odataSkipParam": {
+        "in": "query",
+        "name": "$skip",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "description": "The $skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.",
+          "example": 100
+        }
+      },
+      "odataCountParam": {
+        "in": "query",
+        "name": "$count",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "description": "The $count system query option allows clients to request a count of the matching resources included with the resources in the response. The $count query option has a Boolean value of true or false.",
+          "example": true
+        }
+      },
+      "odataOrderByParam": {
+        "in": "query",
+        "name": "$orderby",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "The $orderby system query option allows clients to request resources in a particular order.",
+          "example": "field1"
+        }
+      },
+      "odataFilterParam": {
+        "in": "query",
+        "name": "$filter",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "The $filter system query option allows clients to filter a collection of resources that are addressed by a request URL.",
+          "example": "field1 eq 'value1'"
+        }
+      },
+      "odataFilterIdParam": {
+        "in": "query",
+        "name": "filterid",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "The filterid is a custom query option allows clients to filter a collection of resources using pre-defined knowledge model filter.",
+          "example": "filterid"
+        }
+      }
+    },
+    "responses": {
+      "Ok": {
+        "description": "The resource has been fetched and transmitted in the message body",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/resultPage"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad Request.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorDTO"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized access.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/authErrorDTO"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorDTO"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorDTO"
+            }
+          }
+        }
+      },
+      "NotSupportedFormat": {
+        "description": "Unsupported media type requested.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorDTO"
+            }
+          }
+        }
+      },
+      "TooManyRequests": {
+        "description": "Too Many Requests.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorDTO"
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "Internal Server Error.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorDTO"
+            }
+          }
+        }
+      },
+      "ServiceUnavailable": {
+        "description": "Service Unavailable.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorDTO"
+            }
+          }
+        }
+      }
+    }
+  }
+}
